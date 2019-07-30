@@ -9,13 +9,17 @@
 <body>
   <!-- メイン要素 -->
   <div class="main">
-    <button onclick="alert('Clicked!!')">alert</button>
+    <button type="button" onclick="alert('Clicked!!')">alert</button>
+    <input type="text" placeholder="aaa">
   </div>
 
   <!-- チャットウィンドウ(モーダル要素) -->
   <div class="modal">
-    <textarea name="inputMessage" id="inputMessage" cols="30" rows="10" autofocus placeholder=" メッセージを入力してださい"></textarea>
+    <textarea name="inputMessage" id="inputMessage" cols="30" rows="10" autofocus placeholder="メッセージを入力してださい"></textarea>
   </div>
+
+  <!-- 切り替えボタン -->
+  <button class="toggleButton" type="button" onclick="toggleModalShowing()">表示切り替え</button>
 
   <!-- Style -->
   <style>
@@ -23,6 +27,10 @@
       background-color: azure;
     }
     .modal{
+      display: none;
+    }
+    .show{
+      display: block;
       top: 0;
       left: 0;
       height: 500px;
@@ -30,6 +38,21 @@
       position: absolute;
       background-color: khaki;
     }
+    .toggleButton{
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 99999
+    }
   </style>
+
+  <!-- Script -->
+  <script>
+    function toggleModalShowing(){
+      const modalEl = document.querySelector('div.modal');
+      modalEl.classList.toggle('show');
+      // console.log(modalEl.classList.toggle('show'));
+    }
+  </script>
 </body>
 </html>
