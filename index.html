@@ -15,7 +15,7 @@
 
   <!-- チャットウィンドウ(モーダル要素) -->
   <div class="modal">
-    <textarea name="inputMessage" id="inputMessage" cols="30" rows="10" tabindex="-1" autofocus placeholder="メッセージを入力してださい"></textarea>
+    <textarea name="inputMessage" id="inputMessage" cols="30" rows="10" tabindex="0" autofocus placeholder="メッセージを入力してださい"></textarea>
   </div>
 
   <!-- 切り替えボタン -->
@@ -48,10 +48,18 @@
 
   <!-- Script -->
   <script>
+    /* モーダルの表示方法を変更する関数 */
     function toggleModalShowing(){
       const modalEl = document.querySelector('div.modal');
       modalEl.classList.toggle('show');
-      // console.log(modalEl.classList.toggle('show'));
+    }
+
+    /* タブキーナビゲーションを無効化 */
+    const inputMessageEl = document.querySelector('div textarea#inputMessage');
+    if(inputMessageEl.addEventListener){
+        inputMessageEl.addEventListener('blur',inputMessageEl.focus,false);
+    }else if(inputMessageEl.attachEvent){
+        inputMessageEl.attachEvent('blur',inputMessageEl.focus);
     }
   </script>
 </body>
