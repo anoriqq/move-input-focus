@@ -9,13 +9,29 @@
 <body>
   <!-- メイン要素 -->
   <div class="main">
-    <button type="button" onclick="alert('Clicked!!')">alert</button>
-    <input type="text" placeholder="aaa">
+    <div>
+      <button type="button" onclick="alert('Clicked!!')">alert</button>
+    </div>
+    <div>
+      <input type="text" placeholder="aaa">
+    </div>
+    <div>
+      <input type="text" placeholder="bbb">
+    </div>
+    <div>
+      <input type="text" placeholder="ccc">
+    </div>
+    <div>
+      <input type="text" placeholder="ddd">
+    </div>
   </div>
 
   <!-- チャットウィンドウ(モーダル要素) -->
   <div class="modal">
-    <textarea name="inputMessage" id="inputMessage" cols="30" rows="10" tabindex="0" autofocus placeholder="メッセージを入力してださい"></textarea>
+    <textarea name="inputMessage" id="inputMessage" cols="20" rows="5" tabindex="0" autofocus placeholder="メッセージを入力してださい"></textarea>
+    <div>
+      <p class="result"></p>
+    </div>
   </div>
 
   <!-- 切り替えボタン -->
@@ -40,8 +56,8 @@
     }
     .toggleButton{
       position: absolute;
-      top: 0;
-      right: 0;
+      top: 150px;
+      left: 0;
       z-index: 99999
     }
   </style>
@@ -57,9 +73,16 @@
     /* タブキーナビゲーションを無効化 */
     const inputMessageEl = document.querySelector('div textarea#inputMessage');
     if(inputMessageEl.addEventListener){
-        inputMessageEl.addEventListener('blur',inputMessageEl.focus,false);
+        inputMessageEl.addEventListener('keydown',printResult,false);
     }else if(inputMessageEl.attachEvent){
-        inputMessageEl.attachEvent('blur',inputMessageEl.focus);
+        inputMessageEl.attachEvent('onkeydown',printResult);
+    }
+
+    /* 結果 */
+    const resultEl = document.querySelector('div div p.result');
+    function printResult(e){
+      console.log(e);
+      resultEl.innerText = `keyCode: ${e.keyCode}\nkey: ${e.key}`;
     }
   </script>
 </body>
