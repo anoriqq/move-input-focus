@@ -74,9 +74,9 @@
     /* タブキーナビゲーションを無効化 */
     const inputMessageEl = document.querySelector('div textarea.inputMessage');
     if(inputMessageEl.addEventListener){
-        inputMessageEl.addEventListener('focusout', handler, false);
+        inputMessageEl.addEventListener('blur', handler, false);
     }else if(inputMessageEl.attachEvent){
-      inputMessageEl.attachEvent('focusout',);
+      inputMessageEl.attachEvent('blur',);
     }
     function handler(){
       setTimeout(()=>document.activeElement.blur(), 1);
