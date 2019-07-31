@@ -6,36 +6,36 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 </head>
-<body>
+<body id="body">
   <!-- メイン要素 -->
   <div class="main">
     <div>
-      <button type="button" onclick="alert('Clicked!!')">alert</button>
+      <button id="button" type="button" onclick="alert('Clicked!!')">alert</button>
     </div>
     <div>
-      <input type="text" placeholder="aaa">
+      <input id="input-1" type="text" placeholder="aaa">
     </div>
     <div>
-      <input type="text" placeholder="bbb">
+      <input id="input-2" type="text" placeholder="bbb">
     </div>
     <div>
-      <input type="text" placeholder="ccc">
+      <input id="input-3" type="text" placeholder="ccc">
     </div>
     <div>
-      <input type="text" placeholder="ddd">
+      <input id="input-4" type="text" placeholder="ddd">
     </div>
   </div>
 
   <!-- チャットウィンドウ(モーダル要素) -->
   <div class="modal">
-    <textarea name="inputMessage" id="inputMessage" cols="20" rows="5" tabindex="0" autofocus placeholder="メッセージを入力してださい"></textarea>
+    <textarea id="textarea" name="inputMessage" class="inputMessage" cols="20" rows="10" tabindex="0" placeholder="メッセージを入力してださい"></textarea>
     <div>
       <p class="result"></p>
     </div>
   </div>
 
   <!-- 切り替えボタン -->
-  <button class="toggleButton" type="button" onclick="toggleModalShowing()">表示切り替え</button>
+  <button id="button-toggle" class="toggleButton" type="button" onclick="toggleModalShowing()">表示切り替え</button>
 
   <!-- Style -->
   <style>
@@ -53,6 +53,7 @@
       width: 500px;
       position: absolute;
       background-color: khaki;
+      opacity: .5;
     }
     .toggleButton{
       position: absolute;
@@ -71,19 +72,22 @@
     }
 
     /* タブキーナビゲーションを無効化 */
-    const inputMessageEl = document.querySelector('div textarea#inputMessage');
+    const inputMessageEl = document.querySelector('div textarea.inputMessage');
     if(inputMessageEl.addEventListener){
-        inputMessageEl.addEventListener('keydown',printResult,false);
+        inputMessageEl.addEventListener('focusout', handler, false);
     }else if(inputMessageEl.attachEvent){
-        inputMessageEl.attachEvent('onkeydown',printResult);
+      inputMessageEl.attachEvent('focusout',);
+    }
+    function handler(){
+      setTimeout(()=>document.activeElement.blur(), 1);
     }
 
-    /* 結果 */
+    /* フォーカスされている要素の id を表示 */
     const resultEl = document.querySelector('div div p.result');
-    function printResult(e){
-      console.log(e);
-      resultEl.innerText = `keyCode: ${e.keyCode}\nkey: ${e.key}`;
-    }
+    setInterval(()=>{
+      const focusedElId = document.activeElement.id;
+      resultEl.innerText = focusedElId;
+    }, 1);
   </script>
 </body>
 </html>
